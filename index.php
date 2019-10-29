@@ -1,18 +1,18 @@
 <?php
 
+// Define the context that will be passed to all 
+define("NO_DIRECT_ACCESS", true);
+
 $context = new stdClass();
-$context->system = new stdClass();
+
 // Grab all fragments
 $fragments = array_map(function($fragment) use (&$context) {	
 	require($fragment);
 	return ["name" => basename($fragment, '.php'), "before" => $before, "execute" => function() use ($execute, &$context) { $execute($context);}];
 }, glob("{fragments/terminate.php,fragments/**/*.php}", GLOB_BRACE));
 
-
+// Sort fragments into a call stack, so the eldest ancestor gets executed last
 $stack = array();
-$keepWalking = true;
-
-// Sort all fragments (index 0 is always terminate)
 while(count($fragments) > 0) {
 	$lastCount = count($fragments);
 	array_walk($fragments, function($value, $index) use (&$stack, &$fragments) {
