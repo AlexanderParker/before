@@ -2,6 +2,8 @@
 ## What is it?
 Playing with an idea based on aspect oriented programming. In this take, the flow of execution is determined by a sequence of fragments which may only specify one ancestor. This restriction imposes a stream-like flow to processing program logic.
 
+It is called "Before" because the programmer can only extend functionality by adding fragments that execute "Before" something that already exists.
+
 ## What is a fragment?
 
 Fragments are simple units that are passed a context object and specify their ancestor, e.g:
@@ -22,11 +24,11 @@ The $context object is passed to every fragment. Fragments are free to access an
 
 ## Does it work?
 
-I don't know. One could envision a flow that starts by setting a route context based on the current visitor URL, accessing and manipulating data, generating template output, and rendering to the screen.
+In theory, yes. For complex use-cases, I don't know. One could envision a flow that starts by setting a route context based on the current visitor URL, accessing and manipulating data, generating template output, and rendering to the screen.
 
-Manipulating the execution flow could then be as simple as adding a fragment at the point before you want to change the $context.
+Manipulating the execution flow could then be as simple as adding a fragment at the point before you want to change the $context. Whether it's possible to build a complex application in a stream-like way is something I haven't played with before.
 
-Could be fun to play with some more complex use cases.
+It could be fun to play with some more complex use cases.
 
 ## What could be improved.
 
